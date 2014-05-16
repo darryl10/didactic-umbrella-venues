@@ -19,8 +19,12 @@ circle {
 
 circle.parent {
     /*fill: #1f77b4;*/
-    fill-opacity: .1;
+    /*fill-opacity: .1;*/
     stroke: steelblue;
+}
+
+circle.parent:first-child {
+    display: none;
 }
 
 circle.parent:hover {

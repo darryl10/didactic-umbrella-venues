@@ -1,5 +1,5 @@
 {
-    "name": "flare",
+    "name": "Tags",
     "children": [
         {
             "name": "Food & Drink",
@@ -27,6 +27,110 @@
                 }
             ]
 
+        },
+        {
+            "name": "Music & Nightlife",
+
+            "children": [
+                {
+                    "name": "The Delaunay",
+                    "reviews_count": 3938,
+                    "average_rating": 10
+                },
+                {
+                    "name": "McDonalds",
+                    "reviews_count": 3812,
+                    "average_rating": 70
+                },
+                {
+                    "name": "Cafe Nero",
+                    "reviews_count": 6714,
+                    "average_rating": 50
+                },
+                {
+                    "name": "Bella Italia",
+                    "reviews_count": 743,
+                    "average_rating": 40
+                }
+            ]
+
+        },
+        {
+            "name": "Shopping & Style",
+
+            "children": [
+                {
+                    "name": "The Delaunay",
+                    "reviews_count": 3938,
+                    "average_rating": 10
+                },
+                {
+                    "name": "McDonalds",
+                    "reviews_count": 3812,
+                    "average_rating": 70
+                },
+                {
+                    "name": "Cafe Nero",
+                    "reviews_count": 6714,
+                    "average_rating": 50
+                },
+                {
+                    "name": "Bella Italia",
+                    "reviews_count": 743,
+                    "average_rating": 40
+                }
+            ]
+
+        },
+        {
+            "name": "Film",
+            "children": [
+                {
+                    "name": "The Delaunay",
+                    "reviews_count": 3938,
+                    "average_rating": 10
+                },
+                {
+                    "name": "McDonalds",
+                    "reviews_count": 3812,
+                    "average_rating": 70
+                },
+                {
+                    "name": "Cafe Nero",
+                    "reviews_count": 6714,
+                    "average_rating": 50
+                },
+                {
+                    "name": "Bella Italia",
+                    "reviews_count": 743,
+                    "average_rating": 40
+                }
+            ]
+        },
+        {
+            "name": "Things to Do",
+            "children": [
+                {
+                    "name": "The Delaunay",
+                    "reviews_count": 3938,
+                    "average_rating": 10
+                },
+                {
+                    "name": "McDonalds",
+                    "reviews_count": 3812,
+                    "average_rating": 70
+                },
+                {
+                    "name": "Cafe Nero",
+                    "reviews_count": 6714,
+                    "average_rating": 50
+                },
+                {
+                    "name": "Bella Italia",
+                    "reviews_count": 743,
+                    "average_rating": 40
+                }
+            ]
         },
         {
             "name": "Museums",
