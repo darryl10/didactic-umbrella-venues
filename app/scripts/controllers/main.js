@@ -41,7 +41,13 @@ angular.module('ugcVizApp')
                 .on("click", function(d, a, b) { console.log(d); return zoom(node == d ? root : d); })
 //                .on("mouseover", function(d, a, b) { return onMouseOver(d); })
 //                .on("mouseleave", function(d, a, b) { return setOpacity(d); })
-                .attr("fill", function(d, i) { return setCircleColour(d,i)})
+                .attr("fill", function (d, i) {
+                    if (d.name === "Fantastic!!!! What a great place. Had a superb Saturday night there last week. Excellent ...") {
+                        console.log(d.parent.name)
+                        console.log('what', d, setCircleColour(d));
+                    }
+                    return setCircleColour(d, i);
+                })
 //                .style("opacity", function(d) { return setOpacity(d)});
 
             vis.selectAll("text")
@@ -59,7 +65,6 @@ angular.module('ugcVizApp')
         });
 
         function onMouseOver(d) {
-
 
             if(d.depth === 1){
                 var k = RADIUS / d.r / 2;
@@ -123,7 +128,6 @@ angular.module('ugcVizApp')
 
                 if(d.average_rating && d.depth ===3) {
                     var color = d3.hsl(d.parent.parent.categoryColor,0.75,d.average_rating / 200 + 0.25);
-                    console.log(d.parent.parent.categoryColor);
                     return color;
                 }
 
