@@ -1,3 +1,7 @@
+/*body {*/
+    /*background: #1A0500;*/
+/*}*/
+
 text {
     font-size: 11px;
     pointer-events: none;
@@ -8,13 +12,13 @@ text.parent {
 }
 
 circle {
-    fill: #ccc;
+    /*fill: #ccc;*/
     stroke: #999;
     pointer-events: all;
 }
 
 circle.parent {
-    fill: #1f77b4;
+    /*fill: #1f77b4;*/
     fill-opacity: .1;
     stroke: steelblue;
 }
@@ -28,6 +32,15 @@ circle.child {
     pointer-events: none;
 }
 
-.test {
-    /*fill: red;*/
+.container {
+    width: 100%;
+    padding: 0;
+}
+
+.container > svg {
+    width: 100%;
+}
+
+.container > svg > g {
+    margin: auto;
 }

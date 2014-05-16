@@ -1,4 +1,5 @@
 'use strict';
+//TODO qa10.d:9090/internal/v1/analytics/tags
 
 angular.module('ugcVizApp')
   .controller('MainCtrl', function ($scope) {
@@ -12,9 +13,9 @@ angular.module('ugcVizApp')
 
         var pack = d3.layout.pack()
             .size([RADIUS, RADIUS])
-            .value(function(d) { return d.size; })
+            .value(function(d) { return d.reviews_count; })
 
-        var vis = d3.select("body").insert("svg:svg", "h2")
+        var vis = d3.select(".container").insert("svg:svg", "h2")
             .attr("width", WIDTH)
             .attr("height", HEIGHT)
             .append("svg:g")
@@ -25,6 +26,10 @@ angular.module('ugcVizApp')
 
             var nodes = pack.nodes(root);
 
+            for(var i = 0; i < nodes.length; ++i) {
+                setParentColor(nodes[i]);
+            }
+
             vis.selectAll("circle")
                 .data(nodes)
                 .enter().append("svg:circle")
@@ -33,8 +38,8 @@ angular.module('ugcVizApp')
                 .attr("cy", function(d) { return d.y; })
                 .attr("r", function(d) { return d.r; })
                 .on("click", function(d) { return zoom(node == d ? root : d); })
-                .attr("style", function() {return "fill: red;"});
-
+                .attr("fill", function(d, i) { return setCircleColour(d,i)});
+//                .style("opacity", function(d) { return d.depth > 1 ? 0 : 1; })
 
             vis.selectAll("text")
                 .data(nodes)
@@ -44,13 +49,42 @@ angular.module('ugcVizApp')
                 .attr("y", function(d) { return d.y; })
                 .attr("dy", ".35em")
                 .attr("text-anchor", "middle")
-                .style("opacity", function(d) { return d.r > 20 ? 1 : 0; })
+                .style("opacity", function(d) { return d.depth > 1 ? 0 : 1; })
                 .text(function(d) { return d.name; });
 
             d3.select(window).on("click", function() { zoom(root); });
         });
 
+        function setParentColor(node) {
+            if(node.depth === 1) {
+                node.categoryColor = Math.random() * 100
+                console.log(node);
+            }
+        }
+
+        function setCircleColour(d,i) {
+
+            var color;
+
+            if(d.depth === 1 ) {
+                color = d3.hsl(d.categoryColor, 0.75,0.5);
+            }
+
+            if(d.average_rating) {
+                color = d3.hsl(d.parent.categoryColor,0.75,0.5);
+                color = color.brighter(d.average_rating / 100);
+            }
+
+            return color;
+
+        }
+
+        function setCircleOpacity() {
+
+        }
+
         function zoom(d, i) {
+
             var k = RADIUS / d.r / 2;
             x.domain([d.x - d.r, d.x + d.r]);
             y.domain([d.y - d.r, d.y + d.r]);
@@ -58,17 +92,33 @@ angular.module('ugcVizApp')
             var t = vis.transition()
                 .duration(d3.event.altKey ? 7500 : 750);
 
-            t.selectAll("circle")
-                .attr("cx", function(d) { return x(d.x); })
-                .attr("cy", function(d) { return y(d.y); })
-                .attr("r", function(d) { return k * d.r; });
+            if(d.depth >= 1) {
+                t.selectAll("circle")
+                    .attr("cx", function(d) { return x(d.x); })
+                    .attr("cy", function(d) { return y(d.y); })
+                    .attr("r", function(d) { return k * d.r; })
+                    .style("opacity", function(d) { return k * d.r > 20 ? 1 : 0; });
 
-            t.selectAll("text")
-                .attr("x", function(d) { return x(d.x); })
-                .attr("y", function(d) { return y(d.y); })
-                .style("opacity", function(d) { return k * d.r > 20 ? 1 : 0; });
+                t.selectAll("text")
+                    .attr("x", function(d) { return x(d.x); })
+                    .attr("y", function(d) { return y(d.y); })
+                    .style("opacity", function(d) { return k * d.r > 20 ? 1 : 0; });
 
-            node = d;
-            d3.event.stopPropagation();
+                node = d;
+                d3.event.stopPropagation();
+            } else {
+                t.selectAll("circle")
+                    .attr("cx", function(d) { return x(d.x); })
+                    .attr("cy", function(d) { return y(d.y); })
+                    .attr("r", function(d) { return k * d.r; })
+                    .style("opacity", function(d) { return d.depth > 1 ? 0 : 1; });
+
+                t.selectAll("text")
+                    .attr("x", function(d) { return x(d.x); })
+                    .attr("y", function(d) { return y(d.y); })
+                    .style("opacity", function(d) { return d.depth > 1 ? 0 : 1; });
+            }
+
+
         }
   });
