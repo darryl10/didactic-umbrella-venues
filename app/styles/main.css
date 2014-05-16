@@ -1,35 +1,32 @@
-/*body {*/
-    /*background: #1A0500;*/
-/*}*/
+body {
+    background: #37051b;
+}
+
+h1 {
+    position: absolute;
+    color: #fff;
+    width: 100%;
+    font-weight: 100;
+}
 
 text {
     font-size: 11px;
     pointer-events: none;
+    color: #fff;
+    font-weight: bold;
 }
 
 text.parent {
-    fill: #1f77b4;
+    fill: #eee;
 }
 
 circle {
-    /*fill: #ccc;*/
-    stroke: #999;
     pointer-events: all;
-}
-
-circle.parent {
-    /*fill: #1f77b4;*/
-    /*fill-opacity: .1;*/
-    stroke: steelblue;
+    cursor: pointer;
 }
 
 circle.parent:first-child {
     display: none;
-}
-
-circle.parent:hover {
-    stroke: #ff7f0e;
-    stroke-width: .5px;
 }
 
 circle.child {
