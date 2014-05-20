@@ -2,10 +2,10 @@
 //TODO qa10.d:9090/internal/v1/analytics/tags
 
 angular.module('ugcVizApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $location) {
         var WIDTH = 1280,
             HEIGHT = 800,
-            RADIUS = 900,
+            RADIUS = 1200,
             x = d3.scale.linear().range([0, RADIUS]),
             y = d3.scale.linear().range([0, RADIUS]),
             node,
@@ -22,7 +22,7 @@ angular.module('ugcVizApp')
             .append("svg:g")
             .attr("transform", "translate(" + (WIDTH - RADIUS) / 2 + "," + (HEIGHT - RADIUS) / 2 + ")");
 
-        d3.json("http://qa10.d:9090/public/v1/analytics/tags", function(data) {
+        d3.json("/data/ugc.json", function(data) {
             node = root = data;
 
             var nodes = pack.nodes(root);
@@ -38,14 +38,10 @@ angular.module('ugcVizApp')
                 .attr("cx", function(d) { return d.x; })
                 .attr("cy", function(d) { return d.y; })
                 .attr("r", function(d) { return d.r; })
-                .on("click", function(d, a, b) { console.log(d); return zoom(node == d ? root : d); })
+                .on("click", function(d, a, b) { return zoom(node == d ? root : d); })
 //                .on("mouseover", function(d, a, b) { return onMouseOver(d); })
 //                .on("mouseleave", function(d, a, b) { return setOpacity(d); })
                 .attr("fill", function (d, i) {
-                    if (d.name === "Fantastic!!!! What a great place. Had a superb Saturday night there last week. Excellent ...") {
-                        console.log(d.parent.name)
-                        console.log('what', d, setCircleColour(d));
-                    }
                     return setCircleColour(d, i);
                 })
 //                .style("opacity", function(d) { return setOpacity(d)});
@@ -116,20 +112,21 @@ angular.module('ugcVizApp')
 
         function setCircleColour(d) {
 
-                if(d.depth === 1 ) {
-                    var color = d3.hsl(d.categoryColor, 0.75,0.5);
-                    return color;
-                }
+            var color = 'red';
 
-                if(d.average_rating && d.depth ===2) {
-                    var color = d3.hsl(d.parent.categoryColor,0.75,d.average_rating / 200 + 0.25);
-                    return color;
-                }
+            if (d.depth === 1) {
+                color = d3.hsl(d.categoryColor, 0.75, 0.5);
+            } else if (d.depth === 2) {
+                color = d3.hsl(d.parent.categoryColor, 0.75, d.average_rating / 200 + 0.25);
+            } else if (d.depth === 3) {
+                color = d3.hsl(d.parent.parent.categoryColor, 0.75, d.average_rating / 200 + 0.25);
+            }
 
-                if(d.average_rating && d.depth ===3) {
-                    var color = d3.hsl(d.parent.parent.categoryColor,0.75,d.average_rating / 200 + 0.25);
-                    return color;
-                }
+            if(!d.average_rating) {
+                console.log(d);
+            }
+
+            return color;
 
         }
 

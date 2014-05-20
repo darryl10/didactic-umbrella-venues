@@ -40,6 +40,7 @@ circle.child {
 
 .container > svg {
     width: 100%;
+    height: 100%;
 }
 
 .container > svg > g {
