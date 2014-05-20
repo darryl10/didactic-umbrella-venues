@@ -104,6 +104,10 @@ angular.module('ugcVizApp')
                 }
             }
 
+            if(text && node.depth === 3) {
+                return 0;
+            }
+
         }
 
         function getRandomArbitary (min, max) {
