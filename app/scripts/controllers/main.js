@@ -40,7 +40,6 @@ angular.module('ugcVizApp')
                 .attr("r", function(d) { return d.r; })
                 .on("click", function(d, a, b) { return zoom(node == d ? root : d); })
 //                .on("mouseover", function(d, a, b) { return onMouseOver(d); })
-//                .on("mouseleave", function(d, a, b) { return setOpacity(d); })
                 .attr("fill", function (d, i) {
                     return setCircleColour(d, i);
                 })
@@ -60,25 +59,6 @@ angular.module('ugcVizApp')
             d3.select(window).on("click", function() { zoom(root); });
         });
 
-        function onMouseOver(d) {
-
-            if(d.depth === 1){
-                var k = RADIUS / d.r / 2;
-                var t = vis.transition()
-                    .duration(d3.event.altKey ? 7500 : 300);
-
-                var rootNode = d;
-
-                t.selectAll("circle")
-                    .style("opacity", function(d) { return setOpacity(d, rootNode, k) });
-
-                t.selectAll("text")
-                    .style("opacity", function(d) { return setOpacity(d, false, k, true) });
-            }
-
-
-        }
-
         function setCategoryColor(node) {
             if(node.depth === 1) {
                 node.categoryColor = getRandomArbitary(0,365);
@@ -95,7 +75,7 @@ angular.module('ugcVizApp')
                 }
 
             } else {
-                if(node.depth > 1) {
+                if(node.depth === 2 && text) {
                     return 0;
                 } else if (node.depth ===1 && !text){
                     return 0.4;
