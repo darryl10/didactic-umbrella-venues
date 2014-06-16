@@ -10,10 +10,12 @@ h1 {
 }
 
 text {
+
     font-size: 11px;
     pointer-events: none;
     color: #fff;
     font-weight: bold;
+    text-shadow: 0px 0px 10px black;
 }
 
 text.parent {

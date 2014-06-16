@@ -75,6 +75,7 @@ angular.module('ugcVizApp')
                 }
 
             } else {
+
                 if(node.depth === 2 && text) {
                     return 0;
                 } else if (node.depth ===1 && !text){
@@ -123,7 +124,7 @@ angular.module('ugcVizApp')
             var rootNode = d;
 
             var t = vis.transition()
-                .duration(d3.event.altKey ? 7500 : 300);
+                .duration(d3.event.altKey ? 7500 : 500);
 
             t.selectAll("circle")
                 .attr("cx", function(d) { return x(d.x); })
