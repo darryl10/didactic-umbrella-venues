@@ -1,1 +1,18 @@
 <!--<h1 class="text-center">Time Out User Generated Content Visualizer</h1>-->
+<div class="ugc-new">
+	<header ng-include="'templates/nav.html'"></header>
+      <div ui-view></div>
+<h1>{{title}}</h1>
+<ul>
+	<li ng-repeat="friend in friends">
+		<h2>{{friend.from.name}}</h2>
+		<p class="lead"><strong>Current message:</strong> {{friend.message}}</p>
+		<textarea class="form-control box-ugc" ng-model="friend.message"></textarea>
+	</li>
+</ul>
+<div class="clearfix"></div>
+<input type="text" ng-model="title">
+<select class="form-control form-gr" ng-model="selectedValue" ng-options="value for value in items"></select>
+<button ng-click="save()" class="btn btn-primary">Save</button>
+</div>
+

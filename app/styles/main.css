@@ -1,12 +1,24 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
 body {
     background: #37051b;
+    font-family: 'Roboto', sans-serif;
+    margin: 1%;
+}
+
+ul, li {
+
+    color: #fff;
+
 }
 
 h1 {
-    position: absolute;
+/*    position: absolute;*/
     color: #fff;
     width: 100%;
     font-weight: 100;
+    font-family: 'Roboto', sans-serif;
+
 }
 
 text {
@@ -47,4 +59,14 @@ circle.child {
 
 .container > svg > g {
     margin: auto;
+}
+
+.box-ugc {
+    width: 90%;
+}
+
+.ugc-new input, .ugc-new button, .ugc-new select {
+
+    margin-bottom: 1.2em;
+
 }

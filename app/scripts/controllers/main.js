@@ -2,7 +2,7 @@
 //TODO qa10.d:9090/internal/v1/analytics/tags
 
 angular.module('ugcVizApp')
-  .controller('MainCtrl', function ($scope, $location) {
+  .controller('MainCtrl', function ($scope, $location, Venues) {
         var WIDTH = 1280,
             HEIGHT = 800,
             RADIUS = 1200,
@@ -10,6 +10,11 @@ angular.module('ugcVizApp')
             y = d3.scale.linear().range([0, RADIUS]),
             node,
             root;
+
+      $scope.title = "Home";
+        // $scope.friends = friends;
+        $scope.items = ['Venues', 'Attractions', 'Documentation', 'Analysis'];
+        $scope.selectedValue = 'Venues';
 
         var pack = d3.layout.pack()
             .size([RADIUS, RADIUS])
@@ -61,7 +66,7 @@ angular.module('ugcVizApp')
 
         function setCategoryColor(node) {
             if(node.depth === 1) {
-                node.categoryColor = getRandomArbitary(0,365);
+                node.categoryColor = getRandomArbitary(0,220);
             }
         }
 
@@ -90,6 +95,11 @@ angular.module('ugcVizApp')
             }
 
         }
+
+          $scope.save = function () {
+            alert("Saved.");
+        };
+
 
         function getRandomArbitary (min, max) {
             return Math.random() * (max - min) + min;
@@ -142,4 +152,23 @@ angular.module('ugcVizApp')
             d3.event.stopPropagation();
 
         }
+
+
   });
+
+// angular.module('app')
+//   .controller('HomeCtrl', ['$scope', 'friends', function($scope, friends) {
+//         $scope.title = "Home";
+//         $scope.friends = friends;
+//         $scope.items = ['Venues', 'Attractions', 'Documentation', 'Analysis'];
+//         $scope.selectedValue = 'Venues';
+//         $scope.save = function () {
+//             alert("Saved.");
+//         };
+//       }]);
+
+//   angular.module('app')
+//    .controller('AboutCtrl', ['$scope', function($scope) {
+//         $scope.title = "Home";
+//         $scope.items = ['thing1', 'thing2', 'thing3', 'thing4'];
+//       }]);
