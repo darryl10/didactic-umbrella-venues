@@ -6,7 +6,8 @@ angular
     'ngResource',
     'ngSanitize',
     'ngRoute',
-    'serviceModule'
+    'serviceModule',
+    'google-maps'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -30,36 +31,29 @@ angular
 
 var serviceModule = angular.module("serviceModule", ["ngResource"]);
 
-serviceModule.factory('apiService', function($resource) {
+serviceModule.factory('apiService', function($http) {
 
   function getVenuesFromLocation(location) {
-      if(location === 'london') {
-        return ['london1', 'london2', 'london3'] 
-      } else {
-         return ['venue1', 'Venue2', 'Venue3'] 
-      }
-  }
-
-  return {
-    venues: function(location) {
-        return getVenuesFromLocation(location);
-    },
-    friends: function() {
-      return ['friend1', 'friend2', 'friend3']
+     var venues = $http({
+        method : 'GET',
+        url: 'http://qa13.d:9090/public/v1/sites/'+location+'/search',
+        params: {
+          what: 'canned-restaurants',
+          page_size: 100
+        }
+     }).then(function(response){
+        return response.data;
+     })
+     return venues;
     }
-  }
+
+    return {
+      venues: function(location) {
+        return getVenuesFromLocation(location);
+      },
+      friends: function() {
+        return ['friend1', 'friend2', 'friend3']
+      }
+    }
 
 });
-
-
-  // 'https://qa13.d:9443/v1/sites/london/search', { 
-  //   Id: "@Id" }, 
-  //   { Venues: 
-  //   { method: 'GET', 
-  //   params: {
-  //     what: 'canned-restaurants',
-  //     page_size: 100
-  //   },
-  //   isArray: true
-  // }}
-  // );

@@ -38,8 +38,6 @@ console.info(r);
 
 var r = $resource
 
-
-
 var service = angular.module("apiService", ["ngResource"]);
 
 service.factory('Venues', function ['$resource', function($resource) {

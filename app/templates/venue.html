@@ -1,8 +1,52 @@
 <h1>Venues</h1>
 <ul>
-	<li ng-repeat="venue in venues">{{venue}}</li>
+	<li ng-repeat="venue in venues" style="height: 300px; overflow: hidden; float: left; width: 300px; background: url({{venue.image_url}}); background-size: cover;">{{venue.name}}, {{venue.location}}, {{venue.latitude}}, {{venue.longitude}}</li>
 </ul>
 <h2>Friends</h2>
 <ul>
 	<li ng-repeat="friends in friends">{{friends}}</li>
 </ul>
+
+<!-- <google-map center="map.center" zoom="map.zoom" draggable="true"> -->
+
+<marker ng-repeat="venue in venues" coords='{{venue.latitude}}, {{venue.longitude}}'
+    icon='{{venue.image_url}}'>
+</marker>
+<!-- <window ng-repeat="venue in venues"
+        coords='{{venue.latitude}}: {{venue.longitude}}'
+        show='false'
+        templateUrl='venue-info.html'
+        templateParameter='#box'
+        isIconVisibleOnClick='true'>
+</window> -->
+<!--  <markers models="map.markers" coords="'self'"> -->
+        <!--window show="true" ng-cloak> this should show </window-->
+        
+ <!--        <windows models="map.markers" show="map.markers.show" templateUrl = "map.template"  templateParameter="map.tp" isIconVisibleOnClick="true" closeClick="map.closeClick">
+        	This is my info.
+        </windows>
+      </markers>
+</google-map> -->
+
+<!--   <google-map center="map.center" zoom="map.zoom" draggable="true">
+
+    <markers models="map.markers" coords="'self'" click="'openClick'">
+      <windows models="map.markers" coords="'self'" show="'showWindow'" isIconVisibleOnClick="true" closeClick="'closeClick'">
+        this is my infowindow text
+      </windows>
+    </markers> -->
+<!--     <markers models="map.markers" coords="51, -0.2" click="'openClick'">
+      <windows models="map.markers" coords="51,-0.2" show="'showWindow'" isIconVisibleOnClick="true" closeClick="'closeClick'">
+        this is my infowindow text
+      </windows>
+    </markers> -->
+<!--     <markers models="map.markers" coords="'self'" click="'openClick'">
+      <windows models="map.markers" coords="'self'" show="'showWindow'" isIconVisibleOnClick="true" closeClick="'closeClick'">
+        this is my infowindow text
+      </windows>
+    </markers> -->
+<!--   </google-map> -->
+<div class="clearfix"></div>
+<div>
+  <div id="map" style="width: 500px; height: 400px;"></div>
+</div>
